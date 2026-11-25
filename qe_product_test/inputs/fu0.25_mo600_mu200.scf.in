@@ -1,0 +1,70 @@
+&control
+	calculation = 'cp'
+	dt =   3
+	iprint = 1
+	!isave = 100 !isave causes a fortran error!
+	ndr = 50
+	ndw = 50
+	nstep = 20000
+	restart_mode = 'restart'
+	!verbosity = 'high'
+	wf_collect = .false.
+	!etot_conv_thr = 1.d-7,
+	!ekin_conv_thr = 1.d-4,
+    prefix='sys',
+    pseudo_dir = '.',
+    outdir='.'  
+    tprnfor = .true.
+ /
+ &system
+    ibrav=  0,
+    nat= 10,     ntyp= 2,
+    ecutwfc =60.0,
+    nspin = 2,
+    nr1b = 24
+	nr2b = 24
+	nr3b = 24
+   !input_dft='rvv10'
+occupations = 'from_input'
+nbnd = 14
+ /
+ &electrons
+  electron_damping =   0.1
+  electron_dynamics = 'verlet'
+  emass = 600
+  emass_cutoff =   3
+  enable_hole_mass = .true.,
+  emass_preconditioning = .false.,
+  hmass = 600,
+  emptymass = 200
+ /
+&IONS
+	ion_dynamics = 'verlet',
+ ion_temperature = 'not_controlled',
+ tempw = 300
+tolp = 5
+ fnosep = 60
+ nhpcl = 3,
+/
+ATOMIC_SPECIES
+H	1.0079	H.pbe-rrkjus_psl.1.0.0.UPF
+C	12.011  C.pbe-n-rrkjus_psl.1.0.0.UPF
+ATOMIC_POSITIONS angstrom
+C 0.0000	0.6601	0.8107	 
+C 0.0000	-0.6601	0.8107	 
+C 0.0000	0.7803	-0.6980	 
+C 0.0000	-0.7803	-0.6980	 
+H 0.0000	1.3955	1.5924	 
+H 0.0000	-1.3955	1.5924	 
+H 0.8804	1.2368	-1.1342	 
+H -0.8804	-1.2368	-1.1342	 
+H -0.8804	1.2368	-1.1342	 
+H 0.8804	-1.2368	-1.1342	 
+CELL_PARAMETERS angstrom
+   15  -0.0   0.0
+  -0.0   15   0.0
+   0.0   0.0  15
+OCCUPATIONS
+1 1 1 1 1 1 1 1 1 1 0.75 0.25 0 0
+1 1 1 1 1 1 1 1 1 1 1 0 0 0
+
